@@ -3,8 +3,8 @@
 import com.example.Docker
 
 def call(String ImageName) {
-
     return new Docker(this).buildDockerImage(imageName)
+}
 
     //echo "building the docker Image..."
    // withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PWD', usernameVariable: 'USER')]) {
@@ -17,4 +17,4 @@ def call(String ImageName) {
 
 
     //}
-}
+//}

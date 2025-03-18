@@ -2,5 +2,7 @@
 
 def call() {
     echo "building the application for branch $BRANCH_NAME"
-    sh 'mvn package'
+    dir('java-maven-app') {
+          sh 'mvn package'
+          }
 }

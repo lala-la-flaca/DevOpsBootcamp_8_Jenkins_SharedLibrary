@@ -37,12 +37,17 @@ This demo project is part of **Module 8: Build Automation & CI/CD with Jenkins**
 ## ⚙️ Project Configuration:
 
 ### Creating a Git repository for the Jenkins Shared Library project.
+
 1. Go to your Github Account and create a new repository.
 
 ### Creating functions in the Jenkins Shared Library to use in the Jenkins pipeline.
+
 1. Open IntelliJ and create a new Groovy project named jenkins-shared-library.
+   
 2. Create a new folder named Vars.
+   
 3. Inside the Vars folder, create a Groovy file named buildJar.groovy. Each file in the Vars folder contains a function to be executed by the Jenkinsfile, and the file name must match the function name called from the Jenkinsfile.
+   
 4. Ensure buildJar.groovy includes the shebang and function definition, as shown:
 
    ```bash
@@ -57,6 +62,7 @@ This demo project is part of **Module 8: Build Automation & CI/CD with Jenkins**
    ```
 5. Create a separate Groovy file for each function you want to reuse in the Jenkins shared library.
    buildImage.groovy file:
+   
    ```bash
       #!/user/bin/env groovy
    
@@ -72,7 +78,9 @@ This demo project is part of **Module 8: Build Automation & CI/CD with Jenkins**
            }
    } 
    ```
+   
 6. Create a new branch for the java-maven-app repository named Jenkins-shared-library.
+   
 7. Edit the Jenkinsfile in the java-maven-app repository to call the buildJar.groovy and buildImage.groovy files as shown below:
 
    ```bash
@@ -99,7 +107,7 @@ This demo project is part of **Module 8: Build Automation & CI/CD with Jenkins**
 1. Open the Jenkins server, navigate to Manage Jenkins, and select System.
 2. Scroll to Global Trusted Pipelines Libraries
 3. Add the name of the shared library and the default version.
-4. Select Modern SCM as the Retrieval Method.
+4. Select ModernSCM as the Retrieval Method.
 5. Select Git under Source Code Management.
 6. Enter the Git repository URL for the shared library.
 7. Add the credentials for Git access and click Save.
@@ -125,35 +133,7 @@ This demo project is part of **Module 8: Build Automation & CI/CD with Jenkins**
        credentialsId: 'github-credentials2'])
    ```
 
-### Creating Jenkins Credentials to Access Git Using a Job
 
-
-
-
-### Adding or Modifying Credentials in Jenkins Security Settings
-The credentials can also be added or modified from the Security section under Credentials as follows:
-
-
-
-
-### Creating a Freestyle Job for a Java Maven Application
-
-
-### Pushing image to Docker Nexus Repository
-
-
-
-
-### Creating a Pipeline Job for a Java Maven Application 
-
-   
-   <details><summary><strong> ❌ Issue  </strong></summary>
-     <ul>
-        <li>The shell session does not change the directory for the subsequent commands.</li>
-        <li>The Docker login fails with variables because of incorrect string interpolation.</li>
-    </ul>
-   </details>
-   
 
 
 

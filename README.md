@@ -22,7 +22,7 @@ This demo project is part of **Module 8: Build Automation & CI/CD with Jenkins**
 - <b>Create a separate Git repository for Jenkins Shared Library project.</b>
 - <b>Create functions in the Jenkins Shared Library to use in the Jenkins pipeline.</b>
 - <b>Integrate the Global library in jenkins pipeline</b>
-- <b>Integrate the shared lifrary for a specific project:</b>
+- <b>Integrate the shared library for a specific project</b>
   
 
 ## 📝 Prerequisites
@@ -40,10 +40,10 @@ This demo project is part of **Module 8: Build Automation & CI/CD with Jenkins**
 1. Go to your Github Account and create a new repository.
 
 ### Creating functions in the Jenkins Shared Library to use in the Jenkins pipeline.
-1. Go to IntelliJ and create a new Groovy project, called jenkins-shared-library.
-2. Create a New folder called Vars.
-3. Create a new groovy file called buildJar.groovy. Each file inside the Vars folder contains a function to be executed by the Jenkinsfile and the name of the file must match the function we are going to call from Jenkinsfile.
-4. The buildJar.groovy contains the shebang and the call function, as follows:
+1. Open IntelliJ and create a new Groovy project named jenkins-shared-library.
+2. Create a new folder named Vars.
+3. Inside the Vars folder, create a Groovy file named buildJar.groovy. Each file in the Vars folder contains a function to be executed by the Jenkinsfile, and the file name must match the function name called from the Jenkinsfile.
+4. Ensure buildJar.groovy includes the shebang and function definition, as shown:
 
    ```bash
    #!/user/bin/env groovy
@@ -55,7 +55,7 @@ This demo project is part of **Module 8: Build Automation & CI/CD with Jenkins**
        }
    }
    ```
-5. We create a different file for each function we want to reuse using the shared library.
+5. Create a separate Groovy file for each function you want to reuse in the Jenkins shared library.
    buildImage.groovy file:
    ```bash
       #!/user/bin/env groovy
@@ -72,8 +72,8 @@ This demo project is part of **Module 8: Build Automation & CI/CD with Jenkins**
            }
    } 
    ```
-6. Create a new branch for the java-maven-app repository called jenkins-shared-library.
-7. Edit the JenkinsFile from the java-maven-app to call the buildJar.groovy and buildImage.groovy,  as follows:
+6. Create a new branch for the java-maven-app repository named Jenkins-shared-library.
+7. Edit the Jenkinsfile in the java-maven-app repository to call the buildJar.groovy and buildImage.groovy files as shown below:
 
    ```bash
     stage("build jar"){
@@ -97,24 +97,33 @@ This demo project is part of **Module 8: Build Automation & CI/CD with Jenkins**
 
 ### Integrating the Global library in the Jenkins pipeline
 1. Open the Jenkins server, navigate to Manage Jenkins, and select System.
-2. Go to the Global Trusted Pipelines Libraries
+2. Scroll to Global Trusted Pipelines Libraries
 3. Add the name of the shared library and the default version.
-4. Select the Modern SCM as the Retrieval Method.
-5. Add the Source Code Management and select Git.
-6. On the project repository add the link to the git shared library repository.
-7. Add the credentials to access git and save.
-8. Edit the Jenkinsfile in the java-maven-app repository and called the shared library as follows:
+4. Select Modern SCM as the Retrieval Method.
+5. Select Git under Source Code Management.
+6. Enter the Git repository URL for the shared library.
+7. Add the credentials for Git access and click Save.
+8. Edit the Jenkinsfile in the java-maven-app repository to reference the shared library as shown below:
    'jenkins-shared-library'-> The name of the library defined in the Jenkins-->System 
    ```bash
    @Library('jenkins-shared-library')
    ```
    <details><summary><strong> 💡 Calling the Library  </strong></summary>
-    as we are using a gloval variable called gv which loads the groovy script, we do not need to add an _ at the end of the @Library('jenkins-shared-library'), in case that the global variable gv is not defined then we must use @Library('jenkins-shared-library')_ instead
+     Since we are using a global variable called gv to load the Groovy script, there is no need to add an underscore (_) at the end of @Library('jenkins-shared-library'). However, if the global variable gv is not defined, you must use @Library('jenkins-shared-library')_ instead
    </details>
 
 
-### Enabling Docker in Jenkins
-
+### Integrating the shared library for a specific project
+1. Open the Jenkins server, navigate to Manage Jenkins, and select System.
+2. Scroll to Global Trusted Pipelines Libraries and delete the Global Trusted Pipelines Libraries details.
+3. Open the Jenkinsfile and add the shared library reference at the beginning.
+   
+   ```bash
+     library identifier: 'jenkins-shared-library@main', retriever: modernSCM(
+      [$class: 'GitSCMSource',
+       remote: 'https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary.git',
+       credentialsId: 'github-credentials2'])
+   ```
 
 ### Creating Jenkins Credentials to Access Git Using a Job
 

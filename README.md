@@ -114,8 +114,10 @@ This demo project is part of **Module 8: Build Automation & CI/CD with Jenkins**
                          }
                      }
          }
-       ``` 
-  <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/jenkinsFile%20To%20Call%20SharedLibrary.png" width=800 />
+   ```
+
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/jenkinsFile%20To%20Call%20SharedLibrary.png" width=800 />  
+
 
 
 
@@ -147,6 +149,7 @@ This demo project is part of **Module 8: Build Automation & CI/CD with Jenkins**
    </details>
 
 9. Run the Pipeline
+
 
 
 ### Parameterizing the buildImage.groovy
@@ -190,11 +193,12 @@ Currently, the ImageName and Tag values are hardcoded in the Groovy files. To ma
            }
          }
        ``` 
-      
+
 
 
 ### Creating a Docker Class
 1. Navigate to the shared Library repository under src/com/example and  create a Docker.groovy file.
+   
 2. Edit the file to import the com.example package.
    
    ```bash
@@ -337,16 +341,15 @@ Currently, the ImageName and Tag values are hardcoded in the Groovy files. To ma
 8. Verify that the docker Image was successfully pushed to DockerHub
 
       <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/using%20name%20and%20tag%20as%20a%20parameter.PNG" width=800 />
-
-
-
-    
+  
+  
+  
 ### Integrating the shared library for a specific project
 1. Open the Jenkins server, navigate to Manage Jenkins, and select System.
    
 2. Scroll to Global Trusted Pipelines Libraries and delete the Global Trusted Pipelines Libraries details.
    
-3. Open the Jenkinsfile and add the shared library reference at the beginning.
+3. Update the Jenkinsfile in the maven-java-app (Shared library branch) and add the shared library reference at the beginning.
    
    ```bash
      library identifier: 'jenkins-shared-library@main', retriever: modernSCM(
@@ -356,6 +359,7 @@ Currently, the ImageName and Tag values are hardcoded in the Groovy files. To ma
    ```
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/Adding%20shared%20library%20but%20not%20a%20global%20library.PNG" width=800/>
 
-
+4. Execute the pipeline only for this branch
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/JenkinsShared%20library%20defined%20i%20jenkins%20file%20no%20global.PNG" width=800 />
 
 

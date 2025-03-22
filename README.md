@@ -365,6 +365,6 @@ Currently, the ImageName and Tag values are hardcoded in the Groovy files. To ma
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/JenkinsShared%20library%20defined%20i%20jenkins%20file%20no%20global.PNG" width=800 />
 
 
-## Integrating Jenkins Webhooks
+## Integrating jenkins webhooks
 
 This section covers how to configure **webhooks** to trigger Jenkins jobs on code changes. It provides detailed steps for integrating with **GitHub** and **GitLab**.

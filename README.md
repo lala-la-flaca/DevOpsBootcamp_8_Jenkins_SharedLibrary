@@ -24,6 +24,7 @@ This demo project is part of **Module 8: Build Automation & CI/CD with Jenkins**
 - <b>Integrate the Global library in jenkins pipeline</b>
 - <b>Integrate the shared library for a specific project</b>
 - <b>Integrate Jenkins webhooks</b>
+- <b>Automatically increase APP versioning</b>
 
   
 
@@ -369,3 +370,11 @@ Currently, the ImageName and Tag values are hardcoded in the Groovy files. To ma
 <a id="webhooks"></a>
 
 This section covers how to configure **webhooks** to trigger Jenkins jobs on code changes. It provides detailed steps for integrating with **GitHub** and **GitLab**.
+
+
+
+### Automatic App Versioning 
+<a id="verisioningapp"></a>
+
+This section covers how to configure **webhooks** to trigger Jenkins jobs on code changes. It provides detailed steps for integrating with **GitHub** and **GitLab**.
+

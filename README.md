@@ -1,4 +1,4 @@
-# ![jenkins](https://github.com/user-attachments/assets/0a854b64-7e42-4941-af78-bea35ccd2f6f) Creating a CI Pipeline with Jenkins  
+# ![jenkins](https://github.com/user-attachments/assets/0a854b64-7e42-4941-af78-bea35ccd2f6f) Creating a CI/CD Pipeline with Jenkins  
 
 ## Description
 
@@ -461,7 +461,7 @@ This section covers how to configure **webhooks** to trigger Jenkins jobs on cod
 ### Configuring Automatic App Versioning in Jenkins
 <a id="versioningapp"></a>
 
-This section covers how to configure Automatic App Versioning when trigerring Jenkins jobs using java-maven application.
+This section covers how to configure Automatic App Versioning when triggering Jenkins jobs using the java-maven application. This demo project is part of **Module 8: Build Automation & CI/CD with Jenkins** from the **Nana DevOps Bootcamp**. It focuses on dynamically incrementing the Application version in Jenkins Pipeline. 
 1. Add a new stage in the Jenkinsfile to increment the application version.
 
    ```sh

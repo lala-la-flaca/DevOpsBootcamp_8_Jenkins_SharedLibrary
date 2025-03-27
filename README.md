@@ -366,15 +366,153 @@ Currently, the ImageName and Tag values are hardcoded in the Groovy files. To ma
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/JenkinsShared%20library%20defined%20i%20jenkins%20file%20no%20global.PNG" width=800 />
 
 
-### Integrating Jenkins Webhooks
+### Integrating Jenkins Webhooks for a Pipeline Job
 <a id="webhooks"></a>
 
-This section covers how to configure **webhooks** to trigger Jenkins jobs on code changes. It provides detailed steps for integrating with **GitHub** and **GitLab**.
+This section covers how to configure **webhooks** to trigger Jenkins jobs on code changes. It provides detailed steps for integrating with  **GitLab**.
+
+1. Migrate the repository from GitHub to GitLab.
+2. Open the Jenkins server, navigate to Manage Jenkins, and select Plugins.
+3. Install the GitLab plugin.
+4. In GitLab, create a new access token.
+5. Specify a token name, description, expiration date, and select the API scope.
+6. Copy and save the token.
+7. In Jenkins, navigate to Manage Jenkins > System.
+8. Scroll to the GitLab section and enable authentication for the /project endpoint.
+9. Enter the connection name, GitLab URL, and GitLab credentials.
+10. In Jenkins, navigate to the job settings, add the GitLab connection, and configure the GitLab repository.
+11. Open GitLab, configure the Jenkins integration by enabling integration, setting the trigger, adding the Jenkins server URL, job name, and credentials.
+12. Build the job.
 
 
+### Integrating Jenkins Webhooks for a Multibranch Job
+1. Open the Jenkins server, navigate to Manage Jenkins, and select Plugins.
+2. Install the Multibranch Scan Webhook Trigger plugin for multibranch jobs.
+3. In Jenkins, open the job settings, navigate to Build Configuration, and under Scan Multibranch Pipeline Triggers, select Scan by Webhook.
+4. Add the trigger token and save the configuration.
+5. In GitLab, navigate to the repository settings, select Webhooks, and add a new webhook.
+6. Copy the Webhook URL from the Scan Multibranch Pipeline Triggers section in Jenkins and paste it into the GitLab webhook settings.
+7. Save the webhook configuration.
+8. Build the job.
 
-### Automatic App Versioning 
+
+### Configuring Automatic App Versioning in Jenkins
 <a id="versioningapp"></a>
 
-This section covers how to configure **webhooks** to trigger Jenkins jobs on code changes. It provides detailed steps for integrating with **GitHub** and **GitLab**.
+This section covers how to configure Automatic App Versioning when trigerring Jenkins jobs using java-maven application.
+1. Add a new stage in the Jenkinsfile to increment the application version.
+
+   ```sh
+   stage("Increment Version"){
+
+            steps{
+                script{
+                echo 'Incrementing version'
+                dir('java-maven-app') {
+                        //Updating the version 
+                        sh 'mvn build-helper:parse-version versions:set \
+                        -DnewVersion=\\\${parsedVersion.majorVersion}.\\\${parsedVersion.minorVersion}.\\\${parsedVersion.nextIncrementalVersion} \
+                        versions:commit'
+
+                        // Obtaining the image name
+                        def matcher = readFile('pom.xml') =~ '<version>(.+)</version>'
+                        def version = matcher[0][1]
+                        env.IMAGE_NAME = "$version-$BUILD_NUMBER"
+                  }
+                }
+            }
+        }
+   
+   ```
+   <img src="" width=800 />
+   
+2. Clean the application folder by deleting all existing builds using the mvn clean package command.
+   
+   ```sh
+    stage("build jar"){
+             steps{
+                 script{
+                     //buildJar()
+                     echo 'building the application'
+                     dir('java-maven-app') {
+                            sh 'mvn clean package'
+                            }
+                 }
+              }
+        }
+   
+   ```
+   <img src="" width=800 />
+   
+3. Update the build image stage to create the image based on the newly incremented version.
+   
+   ```sh
+    stage("build image") {
+            steps {
+                script {
+                    echo "building the docker image..."
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PWD', usernameVariable: 'USER')]){
+                            sh """
+                                cd java-maven-app/
+                                docker build -t lala011/demo-app:${IMAGE_NAME} .
+                                echo $PWD | docker login -u $USER --password-stdin
+                                docker push lala011/demo-app:${IMAGE_NAME}
+                            """
+                            }
+                }
+            }
+         }
+   ```
+   
+4.Modify the Dockerfile to dynamically match any version of the JAR file.
+   
+   ```sh
+    CMD java -jar java-maven-app-*.jar
+   ```
+5. Add a new stage to automatically commit the updated version to the GitLab repository.
+
+   ```bash
+   stage("commit version update"){
+            steps{
+                script{
+                    echo "pushing version to repo..."
+                    withCredentials([usernamePassword(credentialsId: 'gitlab-credentials', passwordVariable: 'PWD', usernameVariable: 'USER')]){
+
+                        sh "git config --global user.email 'jenkins@example.com' "
+                        sh "git config --global user.name 'Jenkins'"
+                        sh "git status"
+                        sh "git branch"
+                        sh "git config --list"
+                        sh "git remote set-url origin https://$USER:$PWD@gitlab.com/devopsbootcamp4095512/devopsbootcamp_8_jenkins_pipeline.git"
+                        sh "git add ."
+                        sh "git commit -m 'ci: Version Bump '"
+                        sh "git push origin HEAD:versioningApp"
+
+                    }
+                }
+
+            }
+   
+   ```
+   
+Triggering any modification may result in an infinite loop of pipeline executions. To prevent this, install and configure the Ignore Committer Strategy plugin.
+ 
+1. Open the Jenkins server, navigate to Manage Jenkins, and select Plugins.
+   
+2. Install the Ignore Committer Strategy plugin.
+   
+   <img src="" width=800 />
+   
+3. In Jenkins, open the job settings, navigate to Branch Sources, and under Build Strategies, add Ignore Committer Strategy.
+   
+   <img src="" width=800 />
+   
+4. Specify the Jenkins email used for commits and select Allow builds when a changeset contains non-ignored author(s).
+   
+   <img src="" width=800 />
+   
+5. Save the configuration
+   
+6. Make a modification in the versioningApp branch to trigger the pipeline.
+
 

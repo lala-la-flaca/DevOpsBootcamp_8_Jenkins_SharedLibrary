@@ -372,28 +372,70 @@ Currently, the ImageName and Tag values are hardcoded in the Groovy files. To ma
 This section covers how to configure **webhooks** to trigger Jenkins jobs on code changes. It provides detailed steps for integrating with  **GitLab**.
 
 1. Migrate the repository from GitHub to GitLab.
+   
 2. Open the Jenkins server, navigate to Manage Jenkins, and select Plugins.
+   
 3. Install the GitLab plugin.
+   
+   <img src="" width=800 />
+   
 4. In GitLab, create a new access token.
+   
+   <img src="" width=800 />
+   
 5. Specify a token name, description, expiration date, and select the API scope.
+    
+   <img src="" width=800 />
+   
 6. Copy and save the token.
+    
 7. In Jenkins, navigate to Manage Jenkins > System.
+    
 8. Scroll to the GitLab section and enable authentication for the /project endpoint.
+    
+    <img src="" width=800 />
+    
 9. Enter the connection name, GitLab URL, and GitLab credentials.
+    
+    <img src="" width=800 />
+    
 10. In Jenkins, navigate to the job settings, add the GitLab connection, and configure the GitLab repository.
-11. Open GitLab, configure the Jenkins integration by enabling integration, setting the trigger, adding the Jenkins server URL, job name, and credentials.
+    
+    <img src="" width=800 />
+    
+11. Open GitLab, and configure the Jenkins integration by enabling integration, setting the trigger, adding the Jenkins server URL, job name, and credentials.
+    
+    <img src="" width=800 />
+    
 12. Build the job.
 
 
 ### Integrating Jenkins Webhooks for a Multibranch Job
 1. Open the Jenkins server, navigate to Manage Jenkins, and select Plugins.
-2. Install the Multibranch Scan Webhook Trigger plugin for multibranch jobs.
-3. In Jenkins, open the job settings, navigate to Build Configuration, and under Scan Multibranch Pipeline Triggers, select Scan by Webhook.
-4. Add the trigger token and save the configuration.
-5. In GitLab, navigate to the repository settings, select Webhooks, and add a new webhook.
-6. Copy the Webhook URL from the Scan Multibranch Pipeline Triggers section in Jenkins and paste it into the GitLab webhook settings.
-7. Save the webhook configuration.
-8. Build the job.
+   
+3. Install the Multibranch Scan Webhook Trigger plugin for multibranch jobs.
+   
+   <img src="" width=800 />
+   
+5. In Jenkins, open the job settings, navigate to Build Configuration, and under Scan Multibranch Pipeline Triggers, select Scan by Webhook.
+     
+   <img src="" width=800 />
+   
+7. Add the trigger token and save the configuration.
+     
+   <img src="" width=800 />
+   
+9. In GitLab, navigate to the repository settings, select Webhooks, and add a new webhook.
+      
+   <img src="" width=800 />
+   
+11. Copy the Webhook URL from the Scan Multibranch Pipeline Triggers section in Jenkins and paste it into the GitLab webhook settings.
+      
+   <img src="" width=800 />
+   
+13. Save the webhook configuration.
+    
+15. Build the job.
 
 
 ### Configuring Automatic App Versioning in Jenkins

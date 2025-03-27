@@ -369,43 +369,63 @@ Currently, the ImageName and Tag values are hardcoded in the Groovy files. To ma
 ### Integrating Jenkins Webhooks for a Pipeline Job
 <a id="webhooks"></a>
 
-This section covers how to configure **webhooks** to trigger Jenkins jobs on code changes. It provides detailed steps for integrating with  **GitLab**.
+This section covers how to configure **webhooks** to trigger Jenkins jobs on code changes. It provides detailed steps for integrating with  **GitLab**. The code is available at https://gitlab.com/devopsbootcamp4095512/devopsbootcamp_8_jenkins_pipeline
 
 1. Migrate the repository from GitHub to GitLab.
+    <details>
+      <summary><strong> 💡 Migrating Repository  </strong></summary>
+        ### 💡 Migrating Repository
+        Since I have been using GitHub, and this demo was conducted in GitLab, we had to migrate the repository from GitHub to GitLab as follows:
+        #### 📌 Steps:
+        1️⃣ **Bare clone the repository:** 
+          ```bash
+          git clone --bare https://github.com/username/repo.git
+          ```
+        2️⃣ Navigate into the cloned repository:
+          ```bash
+          cd repo.git
+          ```
+        3️⃣ Push everything (branches, tags, refs) to GitLab using --mirror:
+          ```bash
+          git push --mirror https://gitlab.com/user/repo.git
+          ```
+   </details>
+
    
-2. Open the Jenkins server, navigate to Manage Jenkins, and select Plugins.
    
-3. Install the GitLab plugin.
+3. Open the Jenkins server, navigate to Manage Jenkins, and select Plugins.
+   
+4. Install the GitLab plugin.
    
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/1%20adding%20gitlab%20plugin.png" width=800 />
    
-4. In GitLab, create a new access token.
+5. In GitLab, create a new access token.
    
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/2%20adding%20new%20gitlab%20token.png" width=800 />
    
-5. Specify a token name, description, expiration date, and select the API scope.
+6. Specify a token name, description, expiration date, and select the API scope.
     
    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/2%20cerating%20new%20gitlab%20token.png" width=800 />
    
-6. Copy and save the token.
+7. Copy and save the token.
     
-7. In Jenkins, navigate to Manage Jenkins > System.
+8. In Jenkins, navigate to Manage Jenkins > System.
     
-8. Scroll to the GitLab section and enable authentication for the /project endpoint.
+9. Scroll to the GitLab section and enable authentication for the /project endpoint.
     
-9. Enter the connection name, GitLab URL, and GitLab credentials.
+10. Enter the connection name, GitLab URL, and GitLab credentials.
     
     <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/3%20creating%20gitlab%20connection%20with%20token.png" width=800 />
     
-10. In Jenkins, navigate to the job settings, add the GitLab connection, and configure the GitLab repository.
+11. In Jenkins, navigate to the job settings, add the GitLab connection, and configure the GitLab repository.
     
     <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/4%20gitlab%20connection%20availabe%20in%20mypipeline.png" width=800 />
     
-11. Open GitLab, and configure the Jenkins integration by enabling integration, setting the trigger, adding the Jenkins server URL, job name, and credentials.
+12. Open GitLab, and configure the Jenkins integration by enabling integration, setting the trigger, adding the Jenkins server URL, job name, and credentials.
     
     <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/5%20integrating%20jenkins%20in%20gitlab%20project.png" width=800 />
     
-12. Build the job.
+13. Build the job.
 
     <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/6%20ok%20pipelne%20with%20gitlab%20plugin.png" width=800 />
 
@@ -537,8 +557,14 @@ This section covers how to configure Automatic App Versioning when trigerring Je
    
    ```
 
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/commit%20version%20update.png" width=800 />
+
+6. oCmmitting changes triggers Jenkins, resulting in a loop of pipeline executions.
+
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/LoopPipeline.png" width=800 />
+
    
+### Preventing Jenkins Pipeline Loop   
 Triggering any modification may result in an infinite loop of pipeline executions. To prevent this, install and configure the Ignore Committer Strategy plugin.
  
 1. Open the Jenkins server, navigate to Manage Jenkins, and select Plugins.
@@ -559,6 +585,6 @@ Triggering any modification may result in an infinite loop of pipeline execution
    
 6. Make a modification in the versioningApp branch to trigger the pipeline.
 
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/Build%20with%20no%20loop.png" width=800 />
 
 

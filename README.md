@@ -377,15 +377,15 @@ This section covers how to configure **webhooks** to trigger Jenkins jobs on cod
    
 3. Install the GitLab plugin.
    
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/1%20adding%20gitlab%20plugin.png" width=800 />
    
 4. In GitLab, create a new access token.
    
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/2%20adding%20new%20gitlab%20token.png" width=800 />
    
 5. Specify a token name, description, expiration date, and select the API scope.
     
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/2%20cerating%20new%20gitlab%20token.png" width=800 />
    
 6. Copy and save the token.
     
@@ -393,21 +393,21 @@ This section covers how to configure **webhooks** to trigger Jenkins jobs on cod
     
 8. Scroll to the GitLab section and enable authentication for the /project endpoint.
     
-    <img src="" width=800 />
-    
 9. Enter the connection name, GitLab URL, and GitLab credentials.
     
-    <img src="" width=800 />
+    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/3%20creating%20gitlab%20connection%20with%20token.png" width=800 />
     
 10. In Jenkins, navigate to the job settings, add the GitLab connection, and configure the GitLab repository.
     
-    <img src="" width=800 />
+    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/4%20gitlab%20connection%20availabe%20in%20mypipeline.png" width=800 />
     
 11. Open GitLab, and configure the Jenkins integration by enabling integration, setting the trigger, adding the Jenkins server URL, job name, and credentials.
     
-    <img src="" width=800 />
+    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/5%20integrating%20jenkins%20in%20gitlab%20project.png" width=800 />
     
 12. Build the job.
+
+    <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/6%20ok%20pipelne%20with%20gitlab%20plugin.png" width=800 />
 
 
 ### Integrating Jenkins Webhooks for a Multibranch Job
@@ -415,27 +415,25 @@ This section covers how to configure **webhooks** to trigger Jenkins jobs on cod
    
 3. Install the Multibranch Scan Webhook Trigger plugin for multibranch jobs.
    
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/7%20installing%20plugin%20for%20multibranch%20pipeline.png" width=800 />
    
 5. In Jenkins, open the job settings, navigate to Build Configuration, and under Scan Multibranch Pipeline Triggers, select Scan by Webhook.
-     
-   <img src="" width=800 />
    
 7. Add the trigger token and save the configuration.
      
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/8%20configuring%20multibranch%20pipeline%20scan%20multibranch.png" width=800 />
    
 9. In GitLab, navigate to the repository settings, select Webhooks, and add a new webhook.
       
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/9%20configuring%20multibranch%20scan%20in%20gitlab%20project.png" width=800 />
    
 11. Copy the Webhook URL from the Scan Multibranch Pipeline Triggers section in Jenkins and paste it into the GitLab webhook settings.
-      
-   <img src="" width=800 />
    
 13. Save the webhook configuration.
     
 15. Build the job.
+
+     <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/10%20build%20ok%20multi-branch.PNG" width=800 />
 
 
 ### Configuring Automatic App Versioning in Jenkins
@@ -466,7 +464,7 @@ This section covers how to configure Automatic App Versioning when trigerring Je
         }
    
    ```
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/obtaining%20current%20version.png" width=800 />
    
 2. Clean the application folder by deleting all existing builds using the mvn clean package command.
    
@@ -484,7 +482,7 @@ This section covers how to configure Automatic App Versioning when trigerring Je
         }
    
    ```
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/BuildJar.png" width=800 />
    
 3. Update the build image stage to create the image based on the newly incremented version.
    
@@ -505,8 +503,10 @@ This section covers how to configure Automatic App Versioning when trigerring Je
             }
          }
    ```
+
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/BuildImage.PNG" width=800/>
    
-4.Modify the Dockerfile to dynamically match any version of the JAR file.
+4. Modify the Dockerfile to dynamically match any version of the JAR file.
    
    ```sh
     CMD java -jar java-maven-app-*.jar
@@ -536,6 +536,8 @@ This section covers how to configure Automatic App Versioning when trigerring Je
             }
    
    ```
+
+   <img src="" width=800 />
    
 Triggering any modification may result in an infinite loop of pipeline executions. To prevent this, install and configure the Ignore Committer Strategy plugin.
  
@@ -543,18 +545,20 @@ Triggering any modification may result in an infinite loop of pipeline execution
    
 2. Install the Ignore Committer Strategy plugin.
    
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/tostop%20loop.png" width=800 />
    
 3. In Jenkins, open the job settings, navigate to Branch Sources, and under Build Strategies, add Ignore Committer Strategy.
    
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/ConfiguiringPluginMultiBranchPipeline.png" width=800 />
    
 4. Specify the Jenkins email used for commits and select Allow builds when a changeset contains non-ignored author(s).
    
-   <img src="" width=800 />
+   <img src="https://github.com/lala-la-flaca/DevOpsBootcamp_8_Jenkins_SharedLibrary/blob/main/Img/Add%20Ignore%20comitter%20strategy.png" width=800 />
    
 5. Save the configuration
    
 6. Make a modification in the versioningApp branch to trigger the pipeline.
+
+   <img src="" width=800 />
 
 

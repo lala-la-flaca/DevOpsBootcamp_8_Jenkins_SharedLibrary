@@ -374,21 +374,23 @@ This section covers how to configure **webhooks** to trigger Jenkins jobs on cod
 1. Migrate the repository from GitHub to GitLab.
     <details>
       <summary><strong> 💡 Migrating Repository  </strong></summary>
-        ### 💡 Migrating Repository
-        Since I have been using GitHub, and this demo was conducted in GitLab, we had to migrate the repository from GitHub to GitLab as follows:
-        #### 📌 Steps:
-        1️⃣ **Bare clone the repository:** 
-          ```bash
-          git clone --bare https://github.com/username/repo.git
-          ```
-        2️⃣ Navigate into the cloned repository:
-          ```bash
-          cd repo.git
-          ```
-        3️⃣ Push everything (branches, tags, refs) to GitLab using --mirror:
-          ```bash
-          git push --mirror https://gitlab.com/user/repo.git
-          ```
+      
+      ### 💡 Migrating Repository
+      Since I have been using GitHub, and this demo was conducted in GitLab, we had to migrate the repository from GitHub to GitLab as follows:
+      
+      #### 📌 Steps:
+       1️⃣ **Bare clone the repository:**
+        
+             git clone --bare https://github.com/username/repo.git
+      
+       2️⃣ Navigate into the cloned repository:
+       
+             cd repo.git
+  
+       3️⃣ Push everything (branches, tags, refs) to GitLab using --mirror:
+
+             git push --mirror https://gitlab.com/user/repo.git
+        
    </details>
 
    
